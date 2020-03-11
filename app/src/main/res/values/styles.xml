@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeOverlay.AppBar.Menu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/menu_text</item>
+    </style>
+
 </resources>
