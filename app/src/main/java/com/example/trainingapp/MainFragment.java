@@ -7,11 +7,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainFragment extends Fragment {
 
@@ -22,6 +25,19 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Button button = view.findViewById(R.id.button);
+        button.setText("button");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSnackbar("test");
+            }
+        });
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -47,5 +63,13 @@ public class MainFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         menu.findItem(R.id.menu_second).setEnabled(isEnable);
+    }
+
+    private void showSnackbar(String message) {
+        View view = getView();
+        if (view == null) return;
+
+        Snackbar snackbar = Snackbar.make(view.findViewById(R.id.button), message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }
